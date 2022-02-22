@@ -7,10 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "auto": "npm run build && npm start"
+    "init": "npm run build && npm start"
   },
   "dependencies": {
     "next": "12.1.0",
+    "prisma": "^3.9.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
