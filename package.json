@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npx prisma migrate dev --name init && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "init": "npm run build && npm start"
+    "init": "npx prisma migrate dev --name init && npm run build && npm start"
   },
   "dependencies": {
+    "@prisma/client": "^3.9.2",
     "next": "12.1.0",
     "prisma": "^3.9.2",
     "react": "17.0.2",
