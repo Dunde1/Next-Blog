@@ -1,0 +1,11 @@
+@font-face {
+  font-family: sandol;
+  src: url('../public/fonts/sandol/SDSamliphopangcheBasic.otf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: sandol-outline;
+  src: url('../public/fonts/sandol/SDSamliphopangcheOutline.otf');
+  font-weight: bold;
+}
