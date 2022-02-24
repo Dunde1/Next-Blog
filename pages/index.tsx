@@ -1,18 +1,8 @@
 import type { NextPage } from 'next';
 import HeadComponent from '../components/HeadComponent';
+import Home from '../components/index/Home';
+import Info from '../components/index/Info';
 import ScrollButton from '../components/ScrollScreen';
-
-const Home = () => {
-  return (
-    <>
-      <div className="home">home</div>
-    </>
-  );
-};
-
-const Info = () => {
-  return <>info</>;
-};
 
 const Posts = () => {
   return <>posts</>;
