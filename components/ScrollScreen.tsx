@@ -1,4 +1,4 @@
-import React, { Children, createRef, ReactNode, useEffect, useState } from 'react';
+import React, { Children, cloneElement, createRef, isValidElement, ReactElement, ReactNode, useEffect, useState } from 'react';
 
 let isMoving = false;
 
@@ -48,8 +48,8 @@ const ScrollScreen = ({ children, screenDescription }: { children: ReactNode; sc
       </nav>
 
       {Children.map(children, (child, i) => (
-        <article className="screen" key={i}>
-          {child}
+        <article className={`screen ${i <= viewNumber ? 'view' : ''} ${i < viewNumber ? 'far' : ''}`} key={i}>
+          {isValidElement(child) ? cloneElement(child, { isView: i === viewNumber }) : ''}
         </article>
       ))}
 
@@ -63,9 +63,19 @@ const ScrollScreen = ({ children, screenDescription }: { children: ReactNode; sc
           }
 
           .screen {
-            position: relative;
+            position: fixed;
             width: 100vw;
             height: 100vh;
+            top: 100vh;
+            background-color: white;
+            transition: transform 1s ease-in-out;
+          }
+
+          .screen.view {
+            transform: translateY(-100vh);
+          }
+          .screen.far {
+            transform: translateY(-100vh) scale(0.8);
           }
 
           .scroll-buttons {
