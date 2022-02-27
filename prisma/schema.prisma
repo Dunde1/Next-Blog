@@ -10,6 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Visit {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  date String
+  host String
+}
+
 model User {
   id  Int @id @default(autoincrement())
   createdAt DateTime  @default(now())
