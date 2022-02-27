@@ -9,3 +9,57 @@
   src: url('../public/fonts/sandol/SDSamliphopangcheOutline.otf');
   font-weight: bold;
 }
+
+@font-face {
+  font-family: HSYuji;
+  src: url('../public/fonts/HSYuji/HSYuji.otf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Cafe24Ssurround;
+  src: url('../public/fonts/Cafe24Ssurround/Cafe24Ssurround.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: CookieRun;
+  src: url('../public/fonts/CookieRun/CookieRun\ Bold.otf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: BMJUA;
+  src: url('../public/fonts/BMJUA/BMJUA_otf.otf'), url('../public/fonts/BMJUA/BMJUA_ttf.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: LABDigital;
+  src: url('../public/fonts/LABDigital/LABDigital.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Leferi;
+  src: url('../public/fonts/Leferi/LeferiBaseBold.otf'), url('../public/fonts/Leferi/LeferiBaseBold.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: BR;
+  src: url('../public/fonts/BR/BR_B.otf'), url('../public/fonts/BR/BR_B.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: netmarble;
+  src: url('../public/fonts/netmarble/netmarbleB.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: paybooc;
+  src: url('../public/fonts/paybooc/paybooc\ Bold.ttf');
+  font-weight: bold;
+}
