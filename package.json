@@ -10,6 +10,7 @@
     "init": "npx prisma migrate dev --name init && npm run build && npm start"
   },
   "dependencies": {
+    "@notionhq/client": "^1.0.0",
     "@prisma/client": "^3.9.2",
     "next": "12.1.0",
     "prisma": "^3.9.2",
