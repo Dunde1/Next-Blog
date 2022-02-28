@@ -1,7 +1,11 @@
 html,
-body {
+body,
+ul,
+li,
+button {
   padding: 0;
   margin: 0;
+  box-sizing: content-box;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
@@ -13,8 +17,6 @@ a {
 button {
   background-color: transparent;
   border: none;
-  margin: 0;
-  padding: 0;
 }
 
 * {
