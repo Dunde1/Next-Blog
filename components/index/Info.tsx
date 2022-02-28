@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Children, ReactNode, useState } from 'react';
 
 const Contents = ({ children, isView }: { children: ReactNode; isView: boolean }) => {
@@ -37,7 +38,7 @@ const Contents = ({ children, isView }: { children: ReactNode; isView: boolean }
           background-color: rgba(0, 0, 0, 0.5);
           transform: scale(1);
           overflow: hidden;
-          transition: transform 1s ease-out, background-color 0.2s;
+          transition: transform 1s, background-color 0.2s;
         }
 
         .contents-list:hover {
@@ -58,7 +59,7 @@ const Contents = ({ children, isView }: { children: ReactNode; isView: boolean }
           gap: 50px;
           width: 100%;
           height: 100%;
-          padding-top: 30px;
+          padding-top: 60px;
           opacity: 1;
           transition: all 0.5s ease-in-out;
         }
@@ -157,6 +158,23 @@ const Info = () => {
             <li>
               <span className="date">2021. 7. ~ 2021. 12.</span>
               <span className="description">부스트캠프</span>
+            </li>
+          </ul>
+          <ul className="link-list" data-title="MY LINK">
+            <li>
+              <Link href="https://github.com/Dunde1">
+                <a target="_blank">github</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="https://Dunde1.github.io/">
+                <a target="_blank">github page</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="https://velog.io/@dunde">
+                <a target="_blank">velog</a>
+              </Link>
             </li>
           </ul>
         </Contents>
@@ -274,7 +292,7 @@ const Info = () => {
 
           ul::before {
             position: absolute;
-            top: 20px;
+            top: 0;
             content: attr(data-title);
             font-family: sandol;
             font-size: 30px;
@@ -313,6 +331,27 @@ const Info = () => {
 
           .history-list > li > span {
             font-family: Cafe24Ssurround;
+          }
+
+          .link-list {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+          }
+
+          .link-list > li {
+            font-family: netmarble;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: aliceblue;
+            transition: all 0.3s;
+          }
+
+          .link-list > li:hover {
+            color: violet;
           }
         `}
       </style>
