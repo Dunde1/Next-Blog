@@ -224,6 +224,7 @@ const Info = () => {
             position: absolute;
             width: 100%;
             height: 100%;
+            top: 0;
             font-family: paybooc;
             color: whitesmoke;
             transition: all 1s;
@@ -263,8 +264,13 @@ const Info = () => {
           }
 
           .img-profile > div,
-          .img-profile > button,
           .img-background > div {
+            position: relative;
+            width: 100%;
+            height: 100%;
+          }
+
+          .img-profile > button {
             position: absolute;
             width: 100%;
             height: 100%;
