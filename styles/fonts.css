@@ -24,6 +24,12 @@
 
 @font-face {
   font-family: CookieRun;
+  src: url('../public/fonts/CookieRun/CookieRun\ Regular.otf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: CookieRun;
   src: url('../public/fonts/CookieRun/CookieRun\ Bold.otf');
   font-weight: bold;
 }
@@ -62,4 +68,22 @@
   font-family: paybooc;
   src: url('../public/fonts/paybooc/paybooc\ Bold.ttf');
   font-weight: bold;
+}
+
+@font-face {
+  font-family: Gilbeot;
+  src: url('../public/fonts/Gilbeot/Gilbeot_BI.otf');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: Gilbeot;
+  src: url('../public/fonts/Gilbeot/Gilbeot_Rainbow.otf');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: Gilbeot;
+  src: url('../public/fonts/Gilbeot/Gilbeot_TG.otf');
+  font-weight: 300;
 }
