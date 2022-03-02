@@ -53,6 +53,12 @@
 }
 
 @font-face {
+  font-family: Leferi;
+  src: url('../public/fonts/Leferi/LeferiBaseRegular.otf'), url('../public/fonts/Leferi/LeferiBaseRegular.ttf');
+  font-weight: normal;
+}
+
+@font-face {
   font-family: BR;
   src: url('../public/fonts/BR/BR_B.otf'), url('../public/fonts/BR/BR_B.ttf');
   font-weight: bold;
