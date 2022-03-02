@@ -1,5 +1,13 @@
 import { Client } from '@notionhq/client';
 
+type searchDBPropsType = {
+  categories?: string[];
+  tags?: string[];
+  words?: string[];
+  pageSize?: number;
+  startCursor?: string;
+};
+
 const notion = new Client({ auth: process.env.NOTION_KEY });
 
 const tryHandler = (fn: Function) => {
@@ -16,14 +24,6 @@ const tryHandler = (fn: Function) => {
     console.error(error);
     return false;
   }
-};
-
-type searchDBPropsType = {
-  categories?: string[];
-  tags?: string[];
-  words?: string[];
-  pageSize?: number;
-  startCursor?: string;
 };
 
 const searchDB = async ({ categories = [], tags = [], words = [], pageSize = 10, startCursor }: searchDBPropsType) => {
