@@ -3,30 +3,40 @@ import { searchDB } from './notionUtil';
 
 const PAGE_SIZE = 10;
 
-const getSearchData = async (datas: string[], nextCursor?: string) => {
+const getSearchData = async (filters: string[], nextCursor?: string) => {
   const [categories, tags, words]: [string[], string[], string[]] = [[], [], []];
 
-  datas.forEach((data) => {
-    if (data[0] === '@') categories.push(data.substring(1));
-    else if (data[0] === '#') tags.push(data.substring(1));
-    else words.push(data);
+  filters.forEach((filter) => {
+    if (filter[0] === '@') categories.push(filter.substring(1));
+    else if (filter[0] === '_') tags.push(filter.substring(1));
+    else words.push(filter);
   });
 
   const getData: QueryDatabaseResponse = await searchDB({ categories, tags, words, startCursor: nextCursor, pageSize: PAGE_SIZE });
 
-  const parsingData = getData.results.map((result: any) => {
-    const { category, tag, title, description } = result.properties;
+  const parsingData =
+    getData.results?.map((result: any) => {
+      const { category, tag, title, description } = result.properties;
+      const { created_time, last_edited_time, url }: { created_time: string; last_edited_time: string; url: string } = result;
+      const { name, color }: { name: string; color: string } = category.select;
+      const { multi_select }: { multi_select: { name: string; color: string } } = tag;
+      const created = new Date(created_time);
+      const lastEdited = new Date(last_edited_time);
 
-    return {
-      category: category.select.name as string,
-      tag: tag.multi_select.map((value: { name: string }) => value.name) as string[],
-      title: title.title[0].plain_text as string,
-      description: description.rich_text[0].plain_text as string,
-      url: result.url as string,
-    };
-  });
+      return {
+        created: created.setHours(created.getHours() + 9),
+        lastEdited: lastEdited.setHours(lastEdited.getHours() + 9),
+        category: { name, color },
+        tag: multi_select,
+        title: title.title[0].plain_text as string,
+        description: description.rich_text[0].plain_text as string,
+        url: url,
+      };
+    }) ?? [];
 
-  return { parsingData, nextCursor: getData.next_cursor, hasMore: getData.has_more };
+  const { next_cursor, has_more } = getData;
+
+  return { results: parsingData, nextCursor: next_cursor, hasMore: has_more };
 };
 
 export { getSearchData };
