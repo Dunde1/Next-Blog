@@ -214,6 +214,8 @@ const Info = () => {
 
           .img-profile {
             position: absolute;
+            left: 0;
+            top: 0;
             overflow: hidden;
             z-index: 2;
             transition: all 1s;
@@ -233,12 +235,11 @@ const Info = () => {
           .detail > .img-profile {
             width: clamp(300px, 30vw, 400px);
             height: clamp(300px, 30vw, 400px);
-            top: 5vw;
-            left: 5vw;
             border: 8px solid whitesmoke;
             border-radius: 0 50% 50% 50%;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
             filter: grayscale(1);
+            transform: translate(5vw, 5vw);
           }
 
           .detail > .img-profile::after {
@@ -249,12 +250,11 @@ const Info = () => {
           .simple > .img-profile {
             width: min(70vw, 70vh);
             height: min(70vw, 70vh);
-            top: 15vh;
-            left: 15vw;
-            border-top: 5vw solid whitesmoke;
-            border-bottom: 5vw solid whitesmoke;
+            border-top: min(5vw, 5vh) solid whitesmoke;
+            border-bottom: min(5vw, 5vh) solid whitesmoke;
             border-radius: 20px;
             box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.8);
+            transform: translate(calc(50vw - 50%), calc(50vh - 50%));
             filter: grayscale(0);
           }
 
