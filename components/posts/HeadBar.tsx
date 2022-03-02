@@ -18,8 +18,10 @@ type responseDataType = {
 
 export const autoCompleteAtom = atom<autocompleteType>({ key: 'autoComplete', default: { categories: [], tags: [] } });
 export const searchListAtom = atom<string[]>({ key: 'searchList', default: [] });
+export const isLoadingAtom = atom<boolean>({ key: 'isLoading', default: false });
 
 const Search = () => {
+  const [isLoading, setIsLoading] = useRecoilState(isLoadingAtom);
   const [searchList, setSearchList] = useRecoilState(searchListAtom);
   const [message, setMessage] = useState<string>();
   const searchInputRef = createRef<HTMLInputElement>();
@@ -28,11 +30,15 @@ const Search = () => {
   const setPostInfo = useSetRecoilState(postInfoAtom);
 
   const updateData = async (searchList: string[]) => {
+    setIsLoading(true);
+
     const { results, nextCursor, hasMore }: responseDataType = await getPosts(searchList);
     if (results) {
       setPosts([...results]);
       setPostInfo({ nextCursor, hasMore });
     }
+
+    setIsLoading(false);
   };
 
   const removeSearchList = (index: number) => {
@@ -45,8 +51,8 @@ const Search = () => {
     if (!target || target.value === '') return setMessage('공백은 입력할 수 없습니다.');
     if (searchList.find((word) => word === target.value)) return setMessage('이미 존재합니다.');
     if (target.value.length < 3) return setMessage('3글자 이상만 검색 할 수 있습니다.');
-    const newSearchList = [...searchList, target.value];
 
+    const newSearchList = [...searchList, target.value];
     setSearchList(newSearchList);
     setMessage('');
     target.value = '';
@@ -69,7 +75,7 @@ const Search = () => {
           <option value={`#${tag}`} key={i} />
         ))}
       </datalist>
-      <button onClick={() => sendInput(searchInputRef.current)}>
+      <button className={isLoading ? 'loading' : ''} onClick={() => sendInput(searchInputRef.current)}>
         <Image src="/images/posts-icon/search-circle-outline.svg" width="100%" height="100%" />
       </button>
       <ul className="search-list">
@@ -99,6 +105,7 @@ const Search = () => {
         }
 
         .search > button {
+          position: relative;
           width: 30px;
           height: 30px;
           border-radius: 50%;
@@ -108,6 +115,29 @@ const Search = () => {
 
         .search > button:hover {
           box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .search > button.loading::after {
+          content: '';
+          position: absolute;
+          width: 35px;
+          height: 35px;
+          top: -2.5px;
+          left: -2.5px;
+          border-radius: 50%;
+          border: 3px solid transparent;
+          border-top: 3px solid blueviolet;
+          box-sizing: border-box;
+          animation: rotate-loading 1s ease-in-out infinite;
+        }
+
+        @keyframes rotate-loading {
+          from {
+            transform: rotateZ(0deg);
+          }
+          to {
+            transform: rotateZ(360deg);
+          }
         }
 
         .message {

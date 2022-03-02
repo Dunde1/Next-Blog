@@ -1,7 +1,7 @@
 import { createRef, useEffect } from 'react';
-import { atom, useRecoilState, useRecoilValue } from 'recoil';
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { getPosts } from '../../utils/postsUtil';
-import { searchListAtom } from './HeadBar';
+import { isLoadingAtom, searchListAtom } from './HeadBar';
 
 export type postsType = {
   created: number;
@@ -25,6 +25,7 @@ const PostBody = () => {
   const [posts, setPosts] = useRecoilState(postsAtom);
   const [postInfo, setPostInfo] = useRecoilState(postInfoAtom);
   const searchList = useRecoilValue(searchListAtom);
+  const setIsLoading = useSetRecoilState(isLoadingAtom);
   const footerRef = createRef<HTMLDivElement>();
 
   const footerCheck = async () => {
@@ -35,9 +36,11 @@ const PostBody = () => {
   };
 
   const requestPosts = async (cursor?: string) => {
+    setIsLoading(true);
     const { nextCursor, hasMore, results } = await getPosts(searchList);
     setPosts([...posts, ...results]);
     setPostInfo({ nextCursor, hasMore });
+    setIsLoading(false);
   };
 
   useEffect(() => {
