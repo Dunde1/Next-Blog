@@ -37,7 +37,7 @@ const PostBody = () => {
 
   const requestPosts = async (cursor?: string) => {
     setIsLoading(true);
-    const { nextCursor, hasMore, results } = await getPosts(searchList);
+    const { nextCursor, hasMore, results } = await getPosts(searchList, cursor);
     setPosts([...posts, ...results]);
     setPostInfo({ nextCursor, hasMore });
     setIsLoading(false);
