@@ -369,6 +369,10 @@ const PostBody = () => {
             white-space: nowrap;
             font-family: netmarble;
           }
+
+          .footer.loading.no-content::after {
+            content: '';
+          }
         `}
       </style>
     </main>
