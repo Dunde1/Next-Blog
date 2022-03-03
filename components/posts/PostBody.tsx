@@ -25,6 +25,225 @@ export type postInfoType = {
 export const postsAtom = atom<postsType[]>({ key: 'results', default: [] });
 export const postInfoAtom = atom<postInfoType>({ key: 'postInfo', default: { nextCursor: undefined, hasMore: true } });
 
+const PostContent = ({ content }: { content: postsType }) => {
+  const { created, lastEdited, url, image, title, category, tag, description } = content;
+  const parsingCreateDate = getParsingDate(new Date(created));
+  const updateDate = new Date(lastEdited);
+  const parsingUpdateDate = getParsingDate(new Date(lastEdited));
+
+  updateDate.setDate(updateDate.getDate() + 7);
+
+  const isNewUpdate = updateDate.getDate() > new Date().getDate();
+
+  return (
+    <li>
+      <div className="link">
+        <Link href={url.replace('www', 'dunde').replace('so', 'site')}>
+          <a target="_blank" />
+        </Link>
+      </div>
+      <div className="head">
+        <span className="create">{`${parsingCreateDate.year}${parsingCreateDate.month}${parsingCreateDate.date}`}</span>
+        <span className={`update ${isNewUpdate ? 'new' : ''}`}>{`${parsingUpdateDate.year}${parsingUpdateDate.month}${parsingUpdateDate.date}`}</span>
+      </div>
+      <div className="image">
+        <Image src={image || '/images/no-image.png'} layout="fill" objectFit="cover" alt={title} />
+      </div>
+      <span className="title">{title}</span>
+      <button className="category" style={{ backgroundColor: category.color }}>
+        {category.name}
+      </button>
+      <div className="tag">
+        {tag.map((t, i) => (
+          <button key={i} style={{ backgroundColor: t.color }}>
+            {t.name}
+          </button>
+        ))}
+      </div>
+      <span className="description">{description}</span>
+
+      <style jsx>
+        {`
+          li {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            border: 2px solid gray;
+            border-radius: 10px;
+            padding: 10px;
+            font-family: BMJUA;
+            box-shadow: 1px 1px 2px gray;
+            overflow: hidden;
+          }
+
+          .link > a {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            cursor: pointer;
+          }
+
+          .head {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+            font-family: LABDigital;
+            font-size: 14px;
+            padding: 0 10px 5px 10px;
+            border-bottom: 1px solid gray;
+            cursor: pointer;
+            z-index: 2;
+          }
+
+          .create:hover::after {
+            content: 'Create Date';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: whitesmoke;
+          }
+
+          .update.new::before {
+            content: 'new';
+            font-family: BMJUA;
+            font-size: 12px;
+            color: whitesmoke;
+            background-color: darkmagenta;
+            border-radius: 5px;
+            margin-right: 5px;
+            padding: 0 3px;
+            animation: color-change 0.3s linear alternate infinite;
+          }
+
+          .update.new:hover::before {
+            visibility: hidden;
+          }
+
+          .update:hover::after {
+            content: 'Update Date';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: whitesmoke;
+          }
+
+          @keyframes color-change {
+            from {
+              background-color: darkmagenta;
+            }
+            to {
+              background-color: deeppink;
+            }
+          }
+
+          .image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 150px;
+            border: 1.5px solid gray;
+            border-radius: 8px;
+            background-color: lightblue;
+            overflow: hidden;
+          }
+
+          .image::before {
+            content: 'LOADING...';
+            position: absolute;
+          }
+
+          .title {
+            position: relative;
+            text-align: center;
+            width: 200px;
+            border-radius: 10px;
+            padding: 5px;
+            box-shadow: 1px 1px 2px inset gray;
+            word-break: keep-all;
+          }
+
+          .category {
+            position: relative;
+            width: 70%;
+            font-family: BMJUA;
+            font-size: 20px;
+            color: whitesmoke;
+            padding: 2px 5px;
+            border-radius: 5px;
+            box-shadow: -2px -2px 3px rgba(0, 0, 0, 0.2) inset, 2px 2px 3px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+          }
+
+          .category:hover::after {
+            content: '@category';
+            position: absolute;
+            font-size: 12px;
+            color: black;
+            background-color: beige;
+            border-radius: 5px;
+            right: 10px;
+            bottom: 10px;
+            padding: 3px;
+            border: 1px solid gray;
+          }
+
+          .tag {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 70%;
+            gap: 5px;
+            z-index: 2;
+          }
+
+          .tag:hover::after {
+            content: '#tag';
+            position: absolute;
+            font-size: 12px;
+            color: black;
+            background-color: beige;
+            border-radius: 5px;
+            top: -22px;
+            right: -10px;
+            padding: 3px;
+            border: 1px solid gray;
+          }
+
+          .tag > button {
+            padding: 1px 4px;
+            font-family: BMJUA;
+            color: whitesmoke;
+            border-radius: 5px;
+            box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.2) inset, 1px 1px 2px rgba(0, 0, 0, 0.2);
+          }
+
+          .description {
+            position: relative;
+            width: 200px;
+            word-break: keep-all;
+            padding: 5px;
+            border-radius: 10px;
+            box-shadow: 1px 1px 2px inset gray;
+          }
+        `}
+      </style>
+    </li>
+  );
+};
+
 const PostBody = () => {
   const [posts, setPosts] = useRecoilState(postsAtom);
   const [postInfo, setPostInfo] = useRecoilState(postInfoAtom);
@@ -60,31 +279,9 @@ const PostBody = () => {
   return (
     <main onScroll={footerCheck} ref={mainRef}>
       <ul>
-        {posts.map((v, i) => {
-          const createDate = getParsingDate(new Date(v.created));
-          const updateDate = getParsingDate(new Date(v.lastEdited));
-
-          return (
-            <li key={i}>
-              <Link href={v.url}>
-                <a target="_blank" />
-              </Link>
-              <div className="head">
-                <span className="create">{`${createDate.year}${createDate.month}${createDate.day}`}</span>
-                <span className="update">{`${updateDate.year}${updateDate.month}${updateDate.day}`}</span>
-              </div>
-              <div className="image">{v.image ? <Image src={v.image} layout="fill" /> : <div className="no-image" />}</div>
-              <span className="title">{v.title}</span>
-              <button className="category">{v.category.name + ' ' + v.category.color}</button>
-              <div className="tag">
-                {v.tag.map((t, i) => (
-                  <button key={i}>{t.name + ' ' + t.color}</button>
-                ))}
-              </div>
-              <span className="description">{v.description}</span>
-            </li>
-          );
-        })}
+        {posts.map((content, i) => (
+          <PostContent content={content} key={i} />
+        ))}
         <div className={`footer ${isLoading ? 'loading' : ''} ${postInfo.hasMore ? '' : 'no-content'}`} ref={footerRef} />
       </ul>
 
@@ -123,19 +320,9 @@ const PostBody = () => {
             position: relative;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             flex-wrap: wrap;
             gap: 20px;
-          }
-
-          li {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid gray;
-            border-radius: 10px;
           }
 
           .footer {
@@ -143,7 +330,7 @@ const PostBody = () => {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 200px;
+            width: 225px;
             height: 100px;
           }
 
