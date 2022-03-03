@@ -5,7 +5,7 @@ import Home, { HomeProps } from '../components/index/Home';
 import Info from '../components/index/Info';
 import Posts from '../components/index/Posts';
 import ScrollButton from '../components/ScrollScreen';
-import { getNowDate } from '../utils/dateUtil';
+import { getParsingDate } from '../utils/dateUtil';
 
 const Index: NextPage<HomeProps> = ({ today, total }) => {
   const screenDescription = ['home', 'information', 'blog posts'];
@@ -26,7 +26,7 @@ const Index: NextPage<HomeProps> = ({ today, total }) => {
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const prisma = new PrismaClient();
 
-  const { year, month, date } = getNowDate(new Date());
+  const { year, month, date } = getParsingDate(new Date());
   const dateString = `${year}${month}${date}`;
 
   await prisma.visit.create({ data: { date: dateString, host: req.headers.host ?? 'undefined' } });

@@ -12,7 +12,7 @@ export type autocompleteType = {
 
 type responseDataType = {
   results: postsType[];
-  nextCursor: string | null;
+  nextCursor: string | undefined;
   hasMore: boolean;
 };
 
