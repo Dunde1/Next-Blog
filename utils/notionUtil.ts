@@ -48,6 +48,12 @@ const searchDB = async ({ categories = [], tags = [], words = [], pageSize = 10,
       },
       start_cursor: startCursor,
       page_size: pageSize,
+      sorts: [
+        {
+          timestamp: 'last_edited_time',
+          direction: 'descending',
+        },
+      ],
     });
   });
 };
