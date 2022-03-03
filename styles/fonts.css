@@ -77,6 +77,18 @@
 }
 
 @font-face {
+  font-family: paybooc;
+  src: url('../public/fonts/paybooc/paybooc\ Medium.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: paybooc;
+  src: url('../public/fonts/paybooc/paybooc\ Light.ttf');
+  font-weight: lighter;
+}
+
+@font-face {
   font-family: Gilbeot;
   src: url('../public/fonts/Gilbeot/Gilbeot_BI.otf');
   font-weight: 100;
