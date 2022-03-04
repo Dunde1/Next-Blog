@@ -62,12 +62,12 @@ const PostContent = ({ content, requestPosts }: { content: postsType; requestPos
         <Image src={image || '/images/no-image.png'} layout="fill" objectFit="cover" alt={title} />
       </div>
       <span className="title">{title}</span>
-      <button className="category" style={{ backgroundColor: category.color }} onClick={() => clickCategory(category.name)}>
+      <button className="category" style={{ backgroundColor: `var(--${category.color}-list)` }} onClick={() => clickCategory(category.name)}>
         {category.name}
       </button>
       <div className="tag">
         {tag.map((t, i) => (
-          <button key={i} style={{ backgroundColor: t.color }} onClick={() => clickTag(t.name)}>
+          <button key={i} style={{ backgroundColor: `var(--${t.color}-list)` }} onClick={() => clickTag(t.name)}>
             {t.name}
           </button>
         ))}
@@ -77,11 +77,25 @@ const PostContent = ({ content, requestPosts }: { content: postsType; requestPos
       <style jsx>
         {`
           li {
+            --default-list: #646464;
+            --gray-list: #8c8c8c;
+            --brown-list: #992323;
+            --orange-list: #d48a00;
+            --yellow-list: #aaaa00;
+            --green-list: #008a00;
+            --blue-list: #2e2edd;
+            --purple-list: #851e85;
+            --pink-list: #b45162;
+            --red-list: #c50000;
+          }
+
+          li {
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            width: 220px;
             gap: 5px;
             border: 2px solid gray;
             border-radius: 10px;
