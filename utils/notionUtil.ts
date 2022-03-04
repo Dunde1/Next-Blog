@@ -1,4 +1,5 @@
 import { Client } from '@notionhq/client';
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 type searchDBPropsType = {
   categories?: string[];
@@ -24,6 +25,37 @@ const tryHandler = (fn: Function) => {
     console.error(error);
     return false;
   }
+};
+
+const getAllSearchDB = async () => {
+  const getSearchDB = (startCursor?: string): QueryDatabaseResponse | false => {
+    return tryHandler((databaseId: string) => {
+      return notion.databases.query({
+        database_id: databaseId,
+        start_cursor: startCursor,
+      });
+    });
+  };
+
+  const results = [];
+  const getResults = await getSearchDB();
+
+  if (getResults) {
+    results.push(...getResults.results);
+    let { has_more, next_cursor } = getResults;
+
+    while (has_more) {
+      const getNextResults = getSearchDB(next_cursor ?? undefined);
+
+      if (getNextResults) {
+        results.push(...getNextResults.results);
+        has_more = getNextResults.has_more;
+        next_cursor = getNextResults.next_cursor;
+      } else return;
+    }
+  } else return;
+
+  return results;
 };
 
 const searchDB = async ({ categories = [], tags = [], words = [], pageSize = 10, startCursor }: searchDBPropsType) => {
@@ -58,4 +90,4 @@ const searchDB = async ({ categories = [], tags = [], words = [], pageSize = 10,
   });
 };
 
-export { searchDB };
+export { getAllSearchDB, searchDB };
