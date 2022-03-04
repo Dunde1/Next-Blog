@@ -76,7 +76,7 @@ const Search = () => {
         ))}
       </datalist>
       <button className={isLoading ? 'loading' : ''} onClick={() => sendInput(searchInputRef.current)}>
-        <Image src="/images/posts-icon/search-circle-outline.svg" width="100%" height="100%" />
+        <Image src="/images/posts-icon/search-circle-outline.svg" width="100%" height="100%" alt="search-button" />
       </button>
       <ul className="search-list">
         {searchList.map((value, i) => (
