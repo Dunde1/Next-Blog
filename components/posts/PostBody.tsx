@@ -59,7 +59,7 @@ const PostContent = ({ content, requestPosts }: { content: postsType; requestPos
         <span className={`update ${isNewUpdate ? 'new' : ''}`}>{`${parsingUpdateDate.year}${parsingUpdateDate.month}${parsingUpdateDate.date}`}</span>
       </div>
       <div className="image">
-        <Image src={image || '/images/no-image.png'} layout="fill" objectFit="cover" alt={title} />
+        <Image src={image || '/images/no-image.png'} layout="fill" objectFit="cover" alt={title} priority />
       </div>
       <span className="title">{title}</span>
       <button className="category" style={{ backgroundColor: `var(--${category.color}-list)` }} onClick={() => clickCategory(category.name)}>
