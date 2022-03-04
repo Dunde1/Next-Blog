@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { createRef, UIEvent, useEffect } from 'react';
+import { createRef, MouseEvent, UIEvent, useEffect } from 'react';
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { getParsingDate } from '../../utils/dateUtil';
 import { getPosts } from '../../utils/postsUtil';
@@ -25,15 +25,27 @@ export type postInfoType = {
 export const postsAtom = atom<postsType[]>({ key: 'results', default: [] });
 export const postInfoAtom = atom<postInfoType>({ key: 'postInfo', default: { nextCursor: undefined, hasMore: true } });
 
-const PostContent = ({ content }: { content: postsType }) => {
+const PostContent = ({ content, requestPosts }: { content: postsType; requestPosts: Function }) => {
   const { created, lastEdited, url, image, title, category, tag, description } = content;
   const parsingCreateDate = getParsingDate(new Date(created));
   const updateDate = new Date(lastEdited);
   const parsingUpdateDate = getParsingDate(new Date(lastEdited));
-
   updateDate.setDate(updateDate.getDate() + 7);
-
   const isNewUpdate = updateDate.getDate() > new Date().getDate();
+  const [searchList, setSearchList] = useRecoilState(searchListAtom);
+  const setPosts = useSetRecoilState(postsAtom);
+
+  const clickCategory = (category: string) => {
+    setSearchList([`@${category}`]);
+    setPosts([]);
+    requestPosts([`@${category}`], []);
+  };
+
+  const clickTag = (tag: string) => {
+    setSearchList([`#${tag}`]);
+    setPosts([]);
+    requestPosts([`#${tag}`], []);
+  };
 
   return (
     <li>
@@ -50,12 +62,12 @@ const PostContent = ({ content }: { content: postsType }) => {
         <Image src={image || '/images/no-image.png'} layout="fill" objectFit="cover" alt={title} />
       </div>
       <span className="title">{title}</span>
-      <button className="category" style={{ backgroundColor: category.color }}>
+      <button className="category" style={{ backgroundColor: category.color }} onClick={() => clickCategory(category.name)}>
         {category.name}
       </button>
       <div className="tag">
         {tag.map((t, i) => (
-          <button key={i} style={{ backgroundColor: t.color }}>
+          <button key={i} style={{ backgroundColor: t.color }} onClick={() => clickTag(t.name)}>
             {t.name}
           </button>
         ))}
@@ -257,19 +269,19 @@ const PostBody = () => {
     if (!(main && footer)) return;
     const footerY = footer.getBoundingClientRect().y;
     const mainY = main.getBoundingClientRect().y;
-    if (footerY - (window.innerHeight - mainY) <= 0 && !isLoading && postInfo.hasMore) requestPosts();
+    if (footerY - (window.innerHeight - mainY) <= 0 && !isLoading && postInfo.hasMore) requestPosts(searchList, posts, postInfo.nextCursor);
   };
 
-  const requestPosts = async () => {
+  const requestPosts = async (searchList: string[], posts: postsType[], postInfoNextCursor?: string) => {
     setIsLoading(true);
-    const { nextCursor, hasMore, results } = await getPosts(searchList, postInfo.nextCursor);
+    const { nextCursor, hasMore, results } = await getPosts(searchList, postInfoNextCursor);
     results && setPosts([...posts, ...results]);
     setPostInfo({ nextCursor, hasMore });
     setIsLoading(false);
   };
 
   useEffect(() => {
-    requestPosts();
+    requestPosts(searchList, posts, postInfo.nextCursor);
   }, []);
 
   useEffect(() => {
@@ -280,7 +292,7 @@ const PostBody = () => {
     <main onScroll={footerCheck} ref={mainRef}>
       <ul>
         {posts.map((content, i) => (
-          <PostContent content={content} key={i} />
+          <PostContent content={content} key={i} requestPosts={requestPosts} />
         ))}
         <div className={`footer ${isLoading ? 'loading' : ''} ${postInfo.hasMore ? '' : 'no-content'}`} ref={footerRef} />
       </ul>
@@ -331,7 +343,7 @@ const PostBody = () => {
             justify-content: center;
             align-items: center;
             width: 225px;
-            height: 100px;
+            height: 300px;
           }
 
           .footer.loading::after {
