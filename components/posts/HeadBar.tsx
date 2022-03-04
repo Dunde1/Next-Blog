@@ -65,7 +65,7 @@ const Search = () => {
 
   return (
     <div className="search">
-      <input type="text" ref={searchInputRef} list="search-data" onKeyPress={enterEvent} />
+      <input type="text" ref={searchInputRef} list="search-data" onKeyPress={enterEvent} placeholder="@category or #tag or word" />
       <span className="message">{message}</span>
       <datalist id="search-data">
         {autocomplete.categories.map((category, i) => (
