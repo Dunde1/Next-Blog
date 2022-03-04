@@ -1,10 +1,10 @@
+import { Category, PrismaClient, Tag } from '@prisma/client';
 import { GetServerSideProps, NextPage } from 'next';
 import { useEffect } from 'react';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
 import HeadComponent from '../../components/HeadComponent';
 import HeadBar, { autoCompleteAtom, autocompleteType } from '../../components/posts/HeadBar';
 import PostBody from '../../components/posts/PostBody';
-import postInfo from './postInfo.json';
 
 type Props = {
   autocomplete: autocompleteType;
@@ -44,7 +44,11 @@ const Posts: NextPage<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const autocomplete: autocompleteType = postInfo;
+  const prisma = new PrismaClient();
+  const categories: Category[] = await prisma.category.findMany();
+  const tags: Tag[] = await prisma.tag.findMany();
+  prisma.$disconnect();
+  const autocomplete: autocompleteType = { categories: categories.map((category) => category.name), tags: tags.map((tag) => tag.name) };
 
   return {
     props: {

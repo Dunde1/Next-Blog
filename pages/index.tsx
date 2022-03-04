@@ -24,15 +24,13 @@ const Index: NextPage<HomeProps> = ({ today, total }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const prisma = new PrismaClient();
-
   const { year, month, date } = getParsingDate(new Date());
   const dateString = `${year}${month}${date}`;
-
+  const prisma = new PrismaClient();
   await prisma.visit.create({ data: { date: dateString, host: req.headers.host ?? 'undefined' } });
-
   const today: number = await prisma.visit.count({ where: { date: { equals: dateString } } });
   const total: number = await prisma.visit.count();
+  prisma.$disconnect();
 
   return {
     props: {
