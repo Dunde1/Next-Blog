@@ -17,9 +17,14 @@ model Visit {
   host String
 }
 
-model User {
+model Category {
   id  Int @id @default(autoincrement())
   createdAt DateTime  @default(now())
-  email String  @unique
-  name  String?
+  name String  @unique
+}
+
+model Tag {
+  id  Int @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  name String  @unique
 }
