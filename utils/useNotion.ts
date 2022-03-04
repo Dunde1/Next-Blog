@@ -25,8 +25,8 @@ const getSearchData = async (filters: string[], nextCursor?: string) => {
     getData.results?.map((result: any) => {
       const { category, tag, title, description } = result.properties;
       const { created_time, last_edited_time, icon, url }: { created_time: string; last_edited_time: string; icon: iconType; url: string } = result;
-      const { name, color }: { name: string; color: string } = category.select;
-      const { multi_select }: { multi_select: { name: string; color: string } } = tag;
+      const { name, color }: { name: string; color: string } = category.select || { name: '', color: '' };
+      const { multi_select }: { multi_select: { name: string; color: string }[] } = tag;
       const created = new Date(created_time);
       const lastEdited = new Date(last_edited_time);
       const image: string | null = icon ? (icon.type === 'file' ? icon.file.url : null) : null;
