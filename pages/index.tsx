@@ -1,11 +1,11 @@
-import { PrismaClient } from '@prisma/client';
 import type { GetServerSideProps, NextPage } from 'next';
 import HeadComponent from '../components/HeadComponent';
 import Home, { HomeProps } from '../components/index/Home';
 import Info from '../components/index/Info';
 import Posts from '../components/index/Posts';
 import ScrollButton from '../components/ScrollScreen';
-import { getParsingDate } from '../utils/dateUtil';
+import { getNowDate, getParsingDate } from '../utils/dateUtil';
+import prisma from '../utils/prismaUtil';
 
 const Index: NextPage<HomeProps> = ({ today, total }) => {
   const screenDescription = ['home', 'information', 'blog posts'];
@@ -26,13 +26,15 @@ const Index: NextPage<HomeProps> = ({ today, total }) => {
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const { year, month, date } = getParsingDate(new Date());
   const dateString = `${year}${month}${date}`;
-  const prisma = new PrismaClient();
   await prisma.visit.create({
-    data: { date: dateString, remoteAddress: JSON.stringify(req.headers['x-forwarded-for']) || req.socket.remoteAddress || 'undefined' },
+    data: {
+      createdAt: getNowDate(),
+      date: dateString,
+      remoteAddress: JSON.stringify(req.headers['x-forwarded-for']) || req.socket.remoteAddress || 'undefined',
+    },
   });
   const today: number = await prisma.visit.count({ where: { date: { equals: dateString } } });
   const total: number = await prisma.visit.count();
-  prisma.$disconnect();
 
   return {
     props: {

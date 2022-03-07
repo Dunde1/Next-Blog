@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
-import fs from 'fs';
+import { getNowDate } from './dateUtil';
 import { getAllSearchDB } from './notionUtil';
+import prisma from './prismaUtil';
 
 type resultType = {
   properties: {
@@ -26,24 +26,20 @@ const makePostsInfo = async () => {
     result.properties.tag.multi_select.forEach((t) => tags.add(t.name));
   });
 
-  const prisma = new PrismaClient();
-
   await prisma.category.deleteMany();
   await prisma.tag.deleteMany();
 
   await prisma.category.createMany({
     data: Array.from(categories).map((category) => {
-      return { name: category };
+      return { createAt: getNowDate(), name: category };
     }),
   });
 
   await prisma.tag.createMany({
     data: Array.from(tags).map((tag) => {
-      return { name: tag };
+      return { createAt: getNowDate(), name: tag };
     }),
   });
-
-  prisma.$disconnect();
 
   return true;
 };

@@ -19,4 +19,14 @@ const getParsingDate = (today: Date): getParsingDateReturnType => {
   };
 };
 
-export { getParsingDate };
+/**
+ * 타임존 적용을 위한 함수
+ * @returns 한국시간으로 적용된 시간으로 Date 리턴
+ */
+const getNowDate = () => {
+  const date = new Date();
+  date.setHours(date.getHours() + 9);
+  return date;
+};
+
+export { getParsingDate, getNowDate };
