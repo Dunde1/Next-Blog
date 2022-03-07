@@ -63,7 +63,7 @@ const searchDB = async ({ categories = [], tags = [], words = [], pageSize = 10,
     return notion.databases.query({
       database_id: databaseId,
       filter: {
-        or: [
+        and: [
           ...categories.map((category) => {
             return { property: 'category', select: { equals: category } };
           }),
