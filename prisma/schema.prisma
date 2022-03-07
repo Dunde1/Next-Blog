@@ -12,19 +12,19 @@ datasource db {
 
 model Visit {
   id Int @id @default(autoincrement())
-  createdAt DateTime
+  createdAt DateTime @default(now())
   date String
   remoteAddress String
 }
 
 model Category {
   id  Int @id @default(autoincrement())
-  createdAt DateTime
+  createdAt DateTime @default(now())
   name String  @unique
 }
 
 model Tag {
   id  Int @id @default(autoincrement())
-  createdAt DateTime
+  createdAt DateTime @default(now())
   name String  @unique
 }

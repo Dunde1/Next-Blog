@@ -31,13 +31,13 @@ const makePostsInfo = async () => {
 
   await prisma.category.createMany({
     data: Array.from(categories).map((category) => {
-      return { createAt: getNowDate(), name: category };
+      return { name: category };
     }),
   });
 
   await prisma.tag.createMany({
     data: Array.from(tags).map((tag) => {
-      return { createAt: getNowDate(), name: tag };
+      return { name: tag };
     }),
   });
 
