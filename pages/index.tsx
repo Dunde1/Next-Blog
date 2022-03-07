@@ -27,7 +27,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const { year, month, date } = getParsingDate(new Date());
   const dateString = `${year}${month}${date}`;
   const prisma = new PrismaClient();
-  await prisma.visit.create({ data: { date: dateString, host: req.headers.host ?? 'undefined' } });
+  await prisma.visit.create({
+    data: { date: dateString, remoteAddress: JSON.stringify(req.headers['x-forwarded-for']) || req.socket.remoteAddress || 'undefined' },
+  });
   const today: number = await prisma.visit.count({ where: { date: { equals: dateString } } });
   const total: number = await prisma.visit.count();
   prisma.$disconnect();

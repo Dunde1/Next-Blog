@@ -14,7 +14,7 @@ model Visit {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   date String
-  host String
+  remoteAddress String
 }
 
 model Category {
