@@ -134,6 +134,9 @@ const Info = () => {
             <li data-tech="react">
               <Image src="/images/tech-stack/reactjs.png" layout="fill" objectFit="cover" alt="reactjs" />
             </li>
+            <li data-tech="nextjs">
+              <Image src="/images/tech-stack/nextjs.png" layout="fill" objectFit="cover" alt="nextjs" />
+            </li>
             <li data-tech="github">
               <Image src="/images/tech-stack/github.png" layout="fill" objectFit="cover" alt="github" />
             </li>
@@ -174,6 +177,13 @@ const Info = () => {
             <li>
               <Link href="https://velog.io/@dunde">
                 <a target="_blank">velog</a>
+              </Link>
+            </li>
+          </ul>
+          <ul className="project-list" data-title="PROJECT">
+            <li>
+              <Link href="https://liarking.r-e.kr/">
+                <a target="_blank">Liar King</a>
               </Link>
             </li>
           </ul>
@@ -325,6 +335,7 @@ const Info = () => {
           }
 
           .history-list > li {
+            position: relative;
             display: flex;
             justify-content: space-between;
             width: 70%;
@@ -349,6 +360,7 @@ const Info = () => {
           }
 
           .link-list > li {
+            position: relative;
             font-family: netmarble;
             font-size: 20px;
             text-transform: uppercase;
@@ -356,7 +368,40 @@ const Info = () => {
             transition: all 0.3s;
           }
 
-          .link-list > li:hover {
+          .link-list > li > a {
+            color: aliceblue;
+            transition: all 0.3s;
+          }
+
+          .link-list > li:hover,
+          .link-list > li:hover > a {
+            color: violet;
+          }
+
+          .project-list {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+          }
+
+          .project-list > li {
+            font-family: netmarble;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: aliceblue;
+            transition: all 0.3s;
+          }
+
+          .project-list > li > a {
+            color: aliceblue;
+            transition: all 0.3s;
+          }
+
+          .project-list > li:hover,
+          .project-list > li:hover > a {
             color: violet;
           }
         `}
