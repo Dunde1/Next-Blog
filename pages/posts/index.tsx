@@ -1,7 +1,7 @@
 import { Category, Tag } from '@prisma/client';
 import { GetServerSideProps, NextPage } from 'next';
 import { useEffect } from 'react';
-import { RecoilRoot, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import HeadComponent from '../../components/HeadComponent';
 import HeadBar, { autoCompleteAtom, autocompleteType } from '../../components/posts/HeadBar';
 import PostBody from '../../components/posts/PostBody';
@@ -11,7 +11,7 @@ type Props = {
   autocomplete: autocompleteType;
 };
 
-const RecoilSub = ({ autocomplete }: { autocomplete: autocompleteType }) => {
+const Posts: NextPage<Props> = ({ autocomplete }: { autocomplete: autocompleteType }) => {
   const setAutoComplete = useSetRecoilState(autoCompleteAtom);
 
   useEffect(() => {
@@ -33,14 +33,6 @@ const RecoilSub = ({ autocomplete }: { autocomplete: autocompleteType }) => {
         }
       `}</style>
     </div>
-  );
-};
-
-const Posts: NextPage<Props> = (props) => {
-  return (
-    <RecoilRoot>
-      <RecoilSub autocomplete={props.autocomplete} />
-    </RecoilRoot>
   );
 };
 
