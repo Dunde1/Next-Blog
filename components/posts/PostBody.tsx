@@ -331,14 +331,14 @@ const PostBody = () => {
 
           main::-webkit-scrollbar {
             position: absolute;
-            width: 8px;
+            width: 14px;
           }
 
           main::-webkit-scrollbar-thumb {
             position: absolute;
             display: block;
-            border-radius: 4px;
-            border: 1px solid transparent;
+            border-radius: 7px;
+            border: 4px solid white;
             background-color: darkgray;
           }
 
