@@ -4,7 +4,6 @@ import { OrbitControls, Stars } from '@react-three/drei';
 import { Physics, useBox, usePlane } from '@react-three/cannon';
 import { RepeatWrapping, TextureLoader } from 'three';
 import HeadComponent from '../../../components/HeadComponent';
-import { Suspense } from 'react';
 
 const Box = () => {
   const [ref, api] = useBox(() => ({ mass: 2 }));
