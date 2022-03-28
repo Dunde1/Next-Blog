@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, createRef, isValidElement, ReactElement, ReactNode, useEffect, useState } from 'react';
+import React, { Children, cloneElement, createRef, isValidElement, ReactNode, useEffect, useState } from 'react';
 
 let isMoving = false;
 
