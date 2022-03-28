@@ -5,13 +5,26 @@ import HeadComponent from '../../components/HeadComponent';
 import threejsList from './threejs/index.json';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-const Card = ({ title, description, imgSrc, link }: { title: string; description: string; imgSrc: string; link: string }) => {
+const Card = ({
+  title,
+  description,
+  imgSrc,
+  link,
+  setIsLoading,
+}: {
+  title: string;
+  description: string;
+  imgSrc: string;
+  link: string;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}) => {
   return (
     <div className="swiper">
       <div className="card">
         <Link href={`/projects/${link}`}>
-          <a />
+          <a onClick={() => setIsLoading(true)} />
         </Link>
         <div className="img">
           <Image src={imgSrc} layout="fill" objectFit="cover" alt={title} />
@@ -109,6 +122,8 @@ const Projects: NextPage = () => {
     },
   };
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   return (
     <div className="projects">
       <HeadComponent title="projects" description="List of works I've made" />
@@ -120,12 +135,14 @@ const Projects: NextPage = () => {
           <Swiper slidesPerView={10} breakpoints={breakpoint} loop={true} autoplay={{ delay: 2000 }}>
             {threejsList.map(({ title, description, imgSrc, link }, i) => (
               <SwiperSlide key={i}>
-                <Card title={title} description={description} imgSrc={imgSrc} link={link} />
+                <Card title={title} description={description} imgSrc={imgSrc} link={link} setIsLoading={setIsLoading} />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
       </section>
+
+      <div className="loading" />
 
       <style jsx>
         {`
@@ -165,6 +182,59 @@ const Projects: NextPage = () => {
             box-sizing: content-box;
             border: 1px solid white;
             background-color: rgba(0, 0, 0, 0.2);
+          }
+
+          div.loading {
+            position: absolute;
+            display: ${isLoading ? 'flex' : 'none'};
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 99;
+          }
+
+          div.loading::before {
+            content: '';
+            position: absolute;
+            width: min(10vw, 10vh);
+            height: min(10vw, 10vh);
+            border: 10px solid whitesmoke;
+            animation: rotate 1s ease-in-out infinite;
+          }
+
+          @keyframes rotate {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+
+          div.loading::after {
+            content: '●';
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: min(10vw, 10vh);
+            height: min(10vw, 10vh);
+            color: whitesmoke;
+            animation: dot 1s infinite;
+          }
+
+          @keyframes dot {
+            0% {
+              content: '●';
+            }
+            33% {
+              content: '●●';
+            }
+            66% {
+              content: '●●●';
+            }
           }
         `}
       </style>
