@@ -3,12 +3,13 @@ import HeadComponent from '../components/HeadComponent';
 import Home, { HomeProps } from '../components/index/Home';
 import Info from '../components/index/Info';
 import Posts from '../components/index/Posts';
+import Projects from '../components/index/Projects';
 import ScrollButton from '../components/ScrollScreen';
 import { getNowDate, getParsingDate } from '../utils/dateUtil';
 import prisma from '../utils/prismaUtil';
 
 const Index: NextPage<HomeProps> = ({ today, total }) => {
-  const screenDescription = ['home', 'information', 'blog posts'];
+  const screenDescription = ['home', 'information', 'blog posts', 'projects'];
 
   return (
     <div className="index">
@@ -17,6 +18,7 @@ const Index: NextPage<HomeProps> = ({ today, total }) => {
         <Home today={today} total={total} />
         <Info />
         <Posts />
+        <Projects />
       </ScrollButton>
       <style jsx>{``}</style>
     </div>
