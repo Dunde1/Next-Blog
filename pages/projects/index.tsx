@@ -14,7 +14,7 @@ const Card = ({ title, description, imgSrc, link }: { title: string; description
           <a />
         </Link>
         <div className="img">
-          <Image src={imgSrc} layout="fill" objectFit="cover" />
+          <Image src={imgSrc} layout="fill" objectFit="cover" alt={title} />
         </div>
         <div className="contents">
           <h1>{title}</h1>
