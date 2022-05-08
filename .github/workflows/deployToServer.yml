@@ -27,6 +27,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script-stop: true
+        script_stop: true
         script: |
           sh ${{ secrets.DEPLOY_PATH }}/deploy.sh
