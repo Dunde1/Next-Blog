@@ -28,4 +28,4 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          sh deploy.sh
+          sh ${{ secrets.INIT_SCRIPT_PATH }}
