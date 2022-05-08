@@ -27,6 +27,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script_stop: true
+        node-version: ${{ matrix.node-version }}
         script: |
           sh ${{ secrets.DEPLOY_PATH }}/deploy.sh
