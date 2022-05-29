@@ -6,7 +6,7 @@ NextJS를 이용한 블로그 제작
 
 ## 배포
 
-- 배포 주소: [https://dunde.kro.kr/](https://dunde.kro.kr/)
+- 배포 주소: [https://blog.dunde.kr/](https://blog.dunde.kr/)
 - 서버: [nCloud 서버](https://www.ncloud.com/)를 이용 (micro server)
   - 초기에 AWS EC2를 사용하였으나 프로젝트 배포시 멈춤현상이 발생하여 nCloud 서버를 사용하였습니다.
   - NginX, certbot을 이용하여 https를 적용하였습니다.
