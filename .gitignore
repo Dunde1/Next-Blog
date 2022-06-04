@@ -2,7 +2,7 @@
 
 # prisma
 .env
-/prisma/migrations
+/src/server/database/prisma/migrations
 
 # dependencies
 /node_modules
