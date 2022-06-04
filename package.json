@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx prisma migrate dev --name init && next dev",
+    "dev": "npx src/server/database/prisma migrate dev --name init && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "init": "npx prisma migrate dev --name init && npm run build && npm start"
+    "init": "npx src/server/database/prisma migrate dev --name init && npm run build && npm start"
   },
   "dependencies": {
     "@notionhq/client": "^1.0.0",
