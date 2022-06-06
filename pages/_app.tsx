@@ -1,14 +1,7 @@
-import '../styles/globals.css';
-import '../styles/fonts.css';
-import type { AppProps } from 'next/app';
-import { RecoilRoot } from 'recoil';
+import '@render/styles/globals.css';
+import '@render/styles/fonts.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <RecoilRoot>
-      <Component {...pageProps} />
-    </RecoilRoot>
-  );
-}
+import MyAppRender from '@render/pages/static/_app/_app.render';
 
+const MyApp = MyAppRender;
 export default MyApp;
