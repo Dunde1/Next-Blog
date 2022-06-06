@@ -1,5 +1,5 @@
 import { VisitCreateNowLogProps, VisitGetCountProps } from './visit.type';
-import prisma from '../prisma';
+import prisma from '../../prisma';
 
 const Visit = {
   createNowLog: (props: VisitCreateNowLogProps) => {
