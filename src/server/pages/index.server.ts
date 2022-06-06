@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { IndexProps } from '@src/common/types/props/index.type';
+import { IndexProps } from '@src/common/types/pageProps/index.type';
 import { getNowDate, getParsingDate } from '@src/common/utils/date/date';
 import Visit from '@server/database/prisma/visit/visit';
 
