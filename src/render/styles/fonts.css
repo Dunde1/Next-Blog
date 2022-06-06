@@ -1,0 +1,107 @@
+@font-face {
+    font-family: sandol;
+    src: url('../../../public/fonts/sandol/SDSamliphopangcheBasic.otf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: sandol-outline;
+    src: url('../../../public/fonts/sandol/SDSamliphopangcheOutline.otf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: HSYuji;
+    src: url('../../../public/fonts/HSYuji/HSYuji.otf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Cafe24Ssurround;
+    src: url('../../../public/fonts/Cafe24Ssurround/Cafe24Ssurround.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: CookieRun;
+    src: url('../../../public/fonts/CookieRun/CookieRun_Regular.otf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: CookieRun;
+    src: url('../../../public/fonts/CookieRun/CookieRun_Bold.otf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: BMJUA;
+    src: url('../../../public/fonts/BMJUA/BMJUA_otf.otf'), url('../../../public/fonts/BMJUA/BMJUA_ttf.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: LABDigital;
+    src: url('../../../public/fonts/LABDigital/LABDigital.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Leferi;
+    src: url('../../../public/fonts/Leferi/LeferiBaseBold.otf'), url('../../../public/fonts/Leferi/LeferiBaseBold.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Leferi;
+    src: url('../../../public/fonts/Leferi/LeferiBaseRegular.otf'), url('../../../public/fonts/Leferi/LeferiBaseRegular.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: BR;
+    src: url('../../../public/fonts/BR/BR_B.otf'), url('../../../public/fonts/BR/BR_B.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: netmarble;
+    src: url('../../../public/fonts/netmarble/netmarbleB.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: paybooc;
+    src: url('../../../public/fonts/paybooc/paybooc_Bold.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: paybooc;
+    src: url('../../../public/fonts/paybooc/paybooc_Medium.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: paybooc;
+    src: url('../../../public/fonts/paybooc/paybooc_Light.ttf');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Gilbeot;
+    src: url('../../../public/fonts/Gilbeot/Gilbeot_BI.otf');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Gilbeot;
+    src: url('../../../public/fonts/Gilbeot/Gilbeot_Rainbow.otf');
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: Gilbeot;
+    src: url('../../../public/fonts/Gilbeot/Gilbeot_TG.otf');
+    font-weight: 300;
+}
