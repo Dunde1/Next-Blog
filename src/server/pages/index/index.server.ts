@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { IndexProps } from '@src/common/types/pageProps/index.type';
 import { getNowDate, getParsingDate } from '@src/common/utils/date/date';
-import Visit from '@server/database/prisma/visit/visit';
+import Visit from '@server/database/prisma/service/visit/visit';
 
 const IndexServerSideProps: GetServerSideProps<IndexProps> = async ({ req }) => {
   const { year, month, date } = getParsingDate(new Date());
